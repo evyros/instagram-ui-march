@@ -1,15 +1,36 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useHistory } from 'react-router-dom';
 import './Register.scss';
 import { registerSchema } from './register.schema';
 
-function Register(props) {
+function Register() {
+
+	const history = useHistory();
+
+	function submit(values) {
+		fetch('http://localhost:4000/user', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(values)
+		}).then(res => {
+			if (res.status === 201) {
+				history.push('/login');
+				return;
+			}
+			console.log('failure!!!');
+		});
+	}
+
 	return (
 		<div>
 			<h2>Register</h2>
 			<Formik
 				initialValues={{username: '', email: '', password: '', agreeToTerms: false}}
-				validationSchema={registerSchema}>
+				validationSchema={registerSchema}
+				onSubmit={submit}>
 				<Form>
 					<div className="form-group mb-3">
 						<label htmlFor="username">Username</label>
@@ -32,7 +53,7 @@ function Register(props) {
 						<ErrorMessage name="agreeToTerms" component="div" />
 					</div>
 					<div className="form-group">
-						<button className="btn btn-success">Register</button>
+						<button type="submit" className="btn btn-success">Register</button>
 					</div>
 				</Form>
 			</Formik>
