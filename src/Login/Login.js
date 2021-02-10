@@ -1,11 +1,13 @@
 
 import { useState } from 'react';
-import './Login.scss';
 import { Form, Formik, Field } from 'formik';
+import Cookies from 'js-cookie';
+import { useHistory } from 'react-router-dom';
+import './Login.scss';
 import { loginSchema } from './login.schema';
 
 function Login() {
-
+	const history = useHistory();
 	const [showError, setShowError] = useState(false);
 
 	function submit(values) {
@@ -18,7 +20,11 @@ function Login() {
 			body: JSON.stringify(values)
 		}).then(res => {
 			if (res.status === 200) {
-				console.log('success');
+				res.json()
+					.then(json => {
+						Cookies.set('instagram-user', json.token, { expires: 30 });
+						history.push('/');
+					});
 				return;
 			}
 			setShowError(true);
