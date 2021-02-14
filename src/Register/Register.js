@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useHistory } from 'react-router-dom';
 import './Register.scss';
 import { registerSchema } from './register.schema';
+import { UserService } from '../services/user.service';
 
 function Register() {
 
@@ -10,20 +11,15 @@ function Register() {
 	const [showSuccess, setSuccess] = useState(false);
 
 	function submit(values) {
-		fetch('http://localhost:4000/user', {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(values)
-		}).then(res => {
-			if (res.status === 201) {
-				setSuccess(true);
-				setTimeout(() => history.push('/login'), 2000);
-				return;
-			}
-			console.log('failure!!!');
-		});
+		UserService.create(values)
+			.then(res => {
+				if (res.status === 201) {
+					setSuccess(true);
+					setTimeout(() => history.push('/login'), 2000);
+					return;
+				}
+				console.log('failure!!!');
+			});
 	}
 
 	return (

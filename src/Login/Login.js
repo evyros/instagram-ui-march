@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { loginSchema } from './login.schema';
 import './Login.scss';
 import intro from './intro.png';
+import { UserService } from '../services/user.service';
 
 function Login() {
 	const history = useHistory();
@@ -13,23 +14,18 @@ function Login() {
 
 	function submit(values) {
 		setShowError(false);
-		fetch('http://localhost:4000/user/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(values)
-		}).then(res => {
-			if (res.status === 200) {
-				res.json()
-					.then(json => {
-						Cookies.set('instagram-user', json.token, { expires: 30 });
-						history.push('/');
-					});
-				return;
-			}
-			setShowError(true);
-		});
+		UserService.login(values)
+			.then(res => {
+				if (res.status === 200) {
+					res.json()
+						.then(json => {
+							Cookies.set('instagram-user', json.token, { expires: 30 });
+							history.push('/');
+						});
+					return;
+				}
+				setShowError(true);
+			});
 	}
 
 	return (
