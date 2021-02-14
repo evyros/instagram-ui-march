@@ -1,0 +1,38 @@
+@import '~bootstrap';
+
+.Register {
+
+  &__title,
+  &__subtitle {
+    color: #333333;
+  }
+
+  &__subtitle {
+    @extend .h4;
+  }
+
+  &__form__error {
+    @extend .text-danger;
+    margin-left: 14px;
+  }
+
+  &__submit-btn,
+  &__submit-btn:active,
+  &__submit-btn:focus {
+    @extend .btn;
+    @extend .btn-dark;
+    @extend .w-100;
+    background: #f54555;
+    border-color: #f54555;
+  }
+
+  &__success {
+    animation: fadein 1s;
+  }
+
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+}

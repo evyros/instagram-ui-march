@@ -1,11 +1,17 @@
 import React from 'react';
 import './Header.scss';
 
-function Header(props) {
+function Header() {
 	return (
 		<header className="Header">
-			<h1>Instagram</h1>
+			<nav className="navbar navbar-dark bg-dark">
+				<div className="container">
+					<a className="navbar-brand" href="/">Instagram</a>
+					<ul className="nav ml-auto">
 
+					</ul>
+				</div>
+			</nav>
 		</header>
 	);
 }

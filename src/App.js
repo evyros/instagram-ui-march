@@ -10,28 +10,20 @@ import {
 } from 'react-router-dom';
 import Login from './Login/Login';
 import Feed from './Feed/Feed';
-import Cookies from 'js-cookie';
+import { UserService } from './services/user.service';
+import { useHistory } from 'react-router-dom';
 
 function App() {
+    const history = useHistory();
 
     useEffect(() => {
-        const body = {
-            token: Cookies.get('instagram-user')
-        };
-        fetch('http://localhost:4000/user/me', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        }).then(res => {
-            if (res.status !== 200) {
-                console.log('you are not a user');
-                return;
-            }
-            res.json().then(user => console.log(user));
-        })
-    }, []);
+        UserService.me()
+            .then(user => {
+                if (!user) {
+                    // history.push('/login');
+                }
+            });
+    }, [history]);
 
   return (
   <Router>

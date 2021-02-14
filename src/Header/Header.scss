@@ -1,8 +1,21 @@
-
 .Header {
-    background: #dddddd;
-}
+    height: 60px;
+    margin-bottom: 30px;
 
-.Header h1 {
-    margin: 0;
+    .navbar-dark .navbar-brand {
+        color: #f54555;
+    }
+
+    .nav-link {
+        color: #ffffff;
+        transition: color 200ms;
+        font-size: 1.7em;
+        padding: 0 12px;
+
+        &:hover {
+            color: #f54555;
+            text-decoration: none;
+        }
+    }
+
 }
