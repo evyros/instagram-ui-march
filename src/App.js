@@ -3,30 +3,29 @@ import './App.scss';
 import { useEffect } from 'react';
 import Header from './Header/Header';
 import Register from './Register/Register';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import Login from './Login/Login';
 import Feed from './Feed/Feed';
 import { UserService } from './services/user.service';
-import { useHistory } from 'react-router-dom';
 
 function App() {
     const history = useHistory();
 
     useEffect(() => {
-        UserService.me()
-            .then(user => {
+        async function getMe() {
+            try {
+                const user = await UserService.me();
                 if (!user) {
-                    // history.push('/login');
+                    history.push('/login');
                 }
-            });
+            } catch(err) {
+                console.log(err);
+            }
+        }
+        getMe();
     }, [history]);
 
   return (
-  <Router>
     <div className="App">
       <Header />
       <div className="container">
@@ -43,7 +42,6 @@ function App() {
         </Switch>
       </div>
     </div>
-  </Router>
   );
 }
 
