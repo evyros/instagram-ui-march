@@ -1,5 +1,7 @@
 import React from 'react';
+import HeaderAvatar from './HeaderAvatar/HeaderAvatar';
 import './Header.scss';
+import Menu from './Menu/Menu';
 
 function Header() {
 	return (
@@ -7,9 +9,12 @@ function Header() {
 			<nav className="navbar navbar-dark bg-dark">
 				<div className="container">
 					<a className="navbar-brand" href="/">Instagram</a>
-					<ul className="nav ml-auto">
 
-					</ul>
+					<Menu />
+
+					<div className="nav ml-auto">
+						<HeaderAvatar />
+					</div>
 				</div>
 			</nav>
 		</header>

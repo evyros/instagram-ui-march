@@ -1,15 +1,18 @@
 
 import './App.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Header/Header';
 import Register from './Register/Register';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Login from './Login/Login';
 import Feed from './Feed/Feed';
 import { UserService } from './services/user.service';
+import { UserContext } from './user-context';
+import PostCreate from './PostCreate/PostCreate';
 
 function App() {
     const history = useHistory();
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         async function getMe() {
@@ -17,7 +20,9 @@ function App() {
                 const user = await UserService.me();
                 if (!user) {
                     history.push('/login');
+                    return;
                 }
+                setUser(user);
             } catch(err) {
                 console.log(err);
             }
@@ -25,23 +30,32 @@ function App() {
         getMe();
     }, [history]);
 
+    function isLoggedIn() {
+        return Boolean(Object.keys(user).length);
+    }
+
   return (
-    <div className="App">
-      <Header />
-      <div className="container">
-        <Switch>
-            <Route path="/register">
-                <Register />
-            </Route>
-            <Route path="/login">
-                <Login />
-            </Route>
-            <Route path="/" exact>
-                <Feed />
-            </Route>
-        </Switch>
-      </div>
-    </div>
+      <UserContext.Provider value={{user, setUser}}>
+        <div className="App">
+          { isLoggedIn() && <Header /> }
+          <div className="container">
+            <Switch>
+                <Route path="/register">
+                    <Register />
+                </Route>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/post/create">
+                    <PostCreate />
+                </Route>
+                <Route path="/" exact>
+                    <Feed />
+                </Route>
+            </Switch>
+          </div>
+        </div>
+      </UserContext.Provider>
   );
 }
 

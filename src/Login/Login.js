@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import Cookies from 'js-cookie';
 import { Link, useHistory } from 'react-router-dom';
@@ -7,25 +7,27 @@ import { loginSchema } from './login.schema';
 import './Login.scss';
 import intro from './intro.png';
 import { UserService } from '../services/user.service';
+import { UserContext } from '../user-context';
 
 function Login() {
 	const history = useHistory();
+	const { setUser } = useContext(UserContext);
 	const [showError, setShowError] = useState(false);
 
-	function submit(values) {
+	async function submit(values) {
 		setShowError(false);
-		UserService.login(values)
-			.then(res => {
-				if (res.status === 200) {
-					res.json()
-						.then(json => {
-							Cookies.set('instagram-user', json.token, { expires: 30 });
-							history.push('/');
-						});
-					return;
-				}
-				setShowError(true);
-			});
+
+		const res = await UserService.login(values);
+		if (res.status !== 200) {
+			setShowError(true);
+			return;
+		}
+		const json = await res.json();
+		Cookies.set('instagram-user', json.token, { expires: 30 });
+
+		const user = await UserService.me();
+		setUser(user);
+		history.push('/');
 	}
 
 	return (
