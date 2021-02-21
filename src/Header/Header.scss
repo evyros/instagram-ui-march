@@ -1,6 +1,5 @@
 .Header {
-    height: 60px;
-    margin-bottom: 30px;
+    height: 56px;
 
     .navbar-dark .navbar-brand {
         color: #f54555;
@@ -16,6 +15,10 @@
             color: #f54555;
             text-decoration: none;
         }
+    }
+
+    .ml-auto {
+        margin-left: auto;
     }
 
 }

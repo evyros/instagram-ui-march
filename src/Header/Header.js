@@ -7,7 +7,7 @@ function Header() {
 	return (
 		<header className="Header">
 			<nav className="navbar navbar-dark bg-dark">
-				<div className="container">
+				<div className="container justify-content-start">
 					<a className="navbar-brand" href="/">Instagram</a>
 
 					<Menu />

@@ -36,24 +36,26 @@ function App() {
 
   return (
       <UserContext.Provider value={{user, setUser}}>
-        <div className="App">
-          { isLoggedIn() && <Header /> }
-          <div className="container">
-            <Switch>
-                <Route path="/register">
-                    <Register />
-                </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/post/create">
-                    <PostCreate />
-                </Route>
-                <Route path="/" exact>
-                    <Feed />
-                </Route>
-            </Switch>
-          </div>
+        <div className="App d-flex flex-column flex-sm-column-reverse vh-100">
+            <div className="flex-grow-1 main">
+              <div className="container mt-lg-4">
+                <Switch>
+                    <Route path="/register">
+                        <Register />
+                    </Route>
+                    <Route path="/login">
+                        <Login />
+                    </Route>
+                    <Route path="/post/create">
+                        <PostCreate />
+                    </Route>
+                    <Route path="/" exact>
+                        <Feed />
+                    </Route>
+                </Switch>
+              </div>
+            </div>
+            { isLoggedIn() && <Header /> }
         </div>
       </UserContext.Provider>
   );

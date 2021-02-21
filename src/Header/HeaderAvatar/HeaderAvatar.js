@@ -11,7 +11,7 @@ function HeaderAvatar() {
 	return (
 		<div className="HeaderAvatar">
 			<Avatar size="md" />
-			{ user.username }
+			<span className="mx-2 HeaderAvatar__username d-none d-lg-block">{ user.username }</span>
 		</div>
 	);
 }
