@@ -11,6 +11,11 @@
     @extend .h4;
   }
 
+  &__form__error {
+    @extend .text-danger;
+    margin-left: 14px;
+  }
+
   &__submit-btn,
   &__submit-btn:active,
   &__submit-btn:focus {

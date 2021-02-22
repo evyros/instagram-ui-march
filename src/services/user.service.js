@@ -1,5 +1,6 @@
 
 import Cookies from 'js-cookie';
+import environment from '../environments/index';
 
 export class UserService {
 
@@ -8,7 +9,7 @@ export class UserService {
 	}
 
 	static me() {
-		return fetch('http://localhost:4000/user/me', {
+		return fetch(environment.apiUrl + '/user/me', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ export class UserService {
 	}
 
 	static create(data) {
-		return fetch('http://localhost:4000/user', {
+		return fetch(environment.apiUrl + '/user', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
@@ -33,7 +34,7 @@ export class UserService {
 	}
 
 	static login(credentials) {
-		return fetch('http://localhost:4000/user/login', {
+		return fetch(environment.apiUrl + '/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
