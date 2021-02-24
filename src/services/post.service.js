@@ -12,4 +12,13 @@ export class PostService {
 		}).then(res => res.json());
 	}
 
+	static async get(id) {
+		const res = await fetch(environment.apiUrl + '/post/' + id, {
+			headers: {
+				Authorization: UserService.getToken()
+			}
+		});
+		return res.json();
+	}
+
 }

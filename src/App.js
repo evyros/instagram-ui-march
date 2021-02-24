@@ -9,6 +9,7 @@ import Feed from './Feed/Feed';
 import { UserService } from './services/user.service';
 import { UserContext } from './user-context';
 import PostCreate from './PostCreate/PostCreate';
+import PostPage from './PostPage/PostPage';
 
 function App() {
     const history = useHistory();
@@ -48,6 +49,9 @@ function App() {
                     </Route>
                     <Route path="/post/create">
                         <PostCreate />
+                    </Route>
+                    <Route path="/post/:id">
+                        <PostPage />
                     </Route>
                     <Route path="/" exact>
                         <Feed />

@@ -1,20 +1,32 @@
 import React from 'react';
 import './PostCreate.scss';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useHistory } from 'react-router-dom';
 import { PostCreateSchema } from './post-create.schema';
 import environment from '../environments/index';
+import { UserService } from '../services/user.service';
 
 function PostCreate() {
 
-	function submit(values) {
+	const history = useHistory();
+
+	async function submit(values) {
 		const data = new FormData();
 		data.append('image', values.image);
 		data.append('description', values.description);
 
-		fetch(environment.apiUrl + '/post', {
-			method: 'PUT',
-			body: data
-		});
+		try {
+			await fetch(environment.apiUrl + '/post', {
+				method: 'PUT',
+				body: data,
+				headers: {
+					Authorization: UserService.getToken()
+				}
+			});
+			history.push('/');
+		} catch(err) {
+			console.log(err);
+		}
 	}
 
 	return (
@@ -25,7 +37,7 @@ function PostCreate() {
 					initialValues={{ image: '', description: '' }}
 					validationSchema={PostCreateSchema}
 					onSubmit={submit}>
-					{({ setFieldValue }) => (
+					{({ setFieldValue, isSubmitting }) => (
 						<Form className="PostCreate__form mt-5 col-lg-8 px-0" noValidate>
 							<div className="form-group my-3">
 								<input type="file"
@@ -42,7 +54,11 @@ function PostCreate() {
 								<ErrorMessage component="small" name="description" className="PostCreate__form__error" />
 							</div>
 							<div className="form-group text-right my-3">
-								<button type="submit" className="mt-3 PostCreate__submit-btn">Post</button>
+								<button type="submit"
+								        className="mt-3 PostCreate__submit-btn"
+										disabled={isSubmitting}>
+									{ isSubmitting ? 'Posting...' : 'Post' }
+								</button>
 							</div>
 						</Form>
 					)}
