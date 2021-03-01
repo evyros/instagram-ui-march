@@ -15,7 +15,7 @@ function Feed() {
 	}, []);
 
 	return (
-		<div>
+		<div className="row">
 			{posts.map(post => (
 				<Post key={post._id} data={post} />
 			))}
