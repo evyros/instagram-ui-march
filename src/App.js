@@ -10,6 +10,7 @@ import { UserService } from './services/user.service';
 import { UserContext } from './user-context';
 import PostCreate from './PostCreate/PostCreate';
 import PostPage from './PostPage/PostPage';
+import Profile from './Profile/Profile';
 
 function App() {
     const history = useHistory();
@@ -52,6 +53,9 @@ function App() {
                     </Route>
                     <Route path="/post/:id">
                         <PostPage />
+                    </Route>
+                    <Route path="/profile/:username">
+                        <Profile />
                     </Route>
                     <Route path="/" exact>
                         <Feed />

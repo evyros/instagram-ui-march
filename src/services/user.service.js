@@ -43,6 +43,24 @@ export class UserService {
 		});
 	}
 
+	static async getPosts(username) {
+		const res = await fetch(environment.apiUrl + '/user/' + username + '/posts', {
+			headers: {
+				Authorization: UserService.getToken()
+			}
+		});
+		return res.json();
+	}
+
+	static async get(username) {
+		const res = await fetch(environment.apiUrl + '/user/' + username, {
+			headers: {
+				Authorization: UserService.getToken()
+			}
+		});
+		return res.json();
+	}
+
 }
 
 
