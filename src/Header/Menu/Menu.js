@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPlusSquare, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './Menu.scss';
 
@@ -15,6 +15,11 @@ function Menu() {
 			<li className="nav-item">
 				<Link className="nav-link" to="/post/create">
 					<FontAwesomeIcon icon={faPlusSquare} />
+				</Link>
+			</li>
+			<li className="nav-item">
+				<Link className="nav-link" to="/search">
+					<FontAwesomeIcon icon={faSearch} />
 				</Link>
 			</li>
 		</ul>

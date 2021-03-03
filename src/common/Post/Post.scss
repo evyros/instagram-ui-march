@@ -26,6 +26,7 @@
   .Post__image {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 250px;
     @media (min-width: 768px) {
       height: 150px;
@@ -33,7 +34,9 @@
     overflow: hidden;
 
     img {
+      height: 100%;
       width: 100%;
+      object-fit: cover;
       transition: all .2s ease-in-out;
     }
   }

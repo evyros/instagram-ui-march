@@ -11,6 +11,7 @@ import { UserContext } from './user-context';
 import PostCreate from './PostCreate/PostCreate';
 import PostPage from './PostPage/PostPage';
 import Profile from './Profile/Profile';
+import Search from './Search/Search';
 
 function App() {
     const history = useHistory();
@@ -56,6 +57,9 @@ function App() {
                     </Route>
                     <Route path="/profile/:username">
                         <Profile />
+                    </Route>
+                    <Route path="/search">
+                        <Search />
                     </Route>
                     <Route path="/" exact>
                         <Feed />

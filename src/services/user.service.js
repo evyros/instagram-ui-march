@@ -61,6 +61,15 @@ export class UserService {
 		return res.json();
 	}
 
+	static async search(username) {
+		const res = await fetch(environment.apiUrl + '/user?username=' + username, {
+			headers: {
+				Authorization: UserService.getToken()
+			}
+		});
+		return res.json();
+	}
+
 }
 
 
