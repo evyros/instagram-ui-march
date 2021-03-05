@@ -10,16 +10,18 @@ function Post({ data }) {
 			<article className="Post">
 				<header>
 					<div className="Post__user">
-						<Avatar size="md" image={data.user.avatar} />
+						<Link to={'/profile/' + data.user.username}>
+							<Avatar size="md" image={data.user.avatar} />
+							<span className="Post__user__username">{data.user.username}</span>
+						</Link>
 					</div>
 					<div className="Post__date">
-
-							<PostDate date={data.createdAt} />
+						<PostDate date={data.createdAt} />
 					</div>
 				</header>
 				<div className="Post__image">
 					<Link to={'/post/' + data._id}>
-					<img src={'data:; base64,' + data.image} className="Post__image" alt="" />
+						<img src={'data:; base64,' + data.image} className="Post__image" alt="" />
 					</Link>
 				</div>
 				<div className="Post__content">

@@ -41,6 +41,20 @@
     }
   }
 
+  .Post__user {
+    a {
+      color: #000;
+      text-decoration: none;
+      &:hover {
+        color: #f54555;
+      }
+    }
+
+    &__username {
+      margin-left: 5px;
+    }
+  }
+
   .Post__content {
     padding: 0 15px;
     margin-top: 15px;

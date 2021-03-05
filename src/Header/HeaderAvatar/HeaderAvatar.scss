@@ -1,7 +1,14 @@
 
 .HeaderAvatar {
-  display: flex;
-  align-items: center;
+  a {
+    display: flex;
+    align-items: center;
 
-  color: #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+
+    &:hover {
+      color: #f54555;
+    }
+  }
 }
