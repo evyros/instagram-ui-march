@@ -4,6 +4,7 @@ import './PostPage.scss';
 import { PostService } from '../services/post.service';
 import Avatar from '../common/Avatar/Avatar';
 import PostDate from '../common/Post/PostDate/PostDate';
+import Comments from '../common/Comments/Comments';
 
 function PostPage() {
 
@@ -48,6 +49,7 @@ function PostPage() {
 					</div>
 				</header>
 				<hr />
+				<Comments postId={post._id} />
 			</div>
 		</div>}
 	</div>
